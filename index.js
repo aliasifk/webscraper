@@ -39,11 +39,13 @@ app.get("/results", function (req, res) {
         const title = $(this).text();
         articles.push(title);
       });
-      res.json(articles);
+      return res.json(articles);
       console.log(articles);
     })
-    .catch((err) => console.log(err));
-  return res.send(200);
+    .catch((err) => {
+      console.log(err);
+      return res.send(500);
+    });
 });
 
 app.listen(PORT, () => console.log(`server running on PORT ${PORT}`));
